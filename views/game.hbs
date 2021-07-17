@@ -1,0 +1,33 @@
+<head>
+    <title>Project 3| Game</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="landing-page">
+        <img src="./images/play.svg" alt="Play Button" class="start-game" alt="Click to start the game" onclick="startGame()">
+    </div>
+
+    <div id="canvas-container">
+        <canvas width="500" height="500" id="canvas" onclick="canvasClick(event)">
+            Sorry -This page uses <code>canvas</code> andyour browser doesn't support it.
+        </canvas>
+
+        <div class="info">
+            <p>Failed Attempts:<span id="failed-attempt">0</span></p>
+        </div>
+        <div class="buttons">
+            <button id="score">Score: 0</button>
+            <button onclick="startOver()">Start Over</button>
+            <a href="./index.html"><button>Stop Play</button></a>
+        </div>
+    </div>
+
+    <div id="game-end">
+        <div style="text-align: center;">
+            <h2>Your Score is: <span id="final-score">0</span></h2>  
+            <button onclick="startOver()">Start Over</button>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="game.js"></script>

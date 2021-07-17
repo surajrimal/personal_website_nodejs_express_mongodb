@@ -1,0 +1,255 @@
+body{
+	background-color:rgb(80%,80%,80%);
+}
+
+
+header{
+	font-variant: small-caps;
+}
+
+footer{
+	background-color:rgb(85%,85%,85%);
+	padding: 10px;
+	text-align: center;
+}
+
+hr{
+	color:rgb(90%,90%,90%);
+}
+
+section{	
+	background-color:rgb(92%,92%,92%);
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+table, th, td{
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+button{
+	margin-top: 5px;
+}
+
+input:focus{
+	border: 1px solid green !important;
+}
+
+input:required{
+	border: 2px solid green !important;
+}
+
+/* Footer */
+footer>table>tbody>tr>td{
+	vertical-align: top;
+	width: 70%;
+}
+
+.social-icons >a>img{
+	width: 40px;
+}
+
+.newsletter{
+	text-align: left;
+}
+
+.newsletter > input{
+	padding: 10px;
+	border: 1px solid green;
+}
+
+.newsletter > button{
+	margin: 10px auto;
+}
+
+/*
+	Styles classes that can be reused
+*/
+.text-center{
+	text-align: center
+}
+
+.float-right{
+	float:right;
+}
+
+.navigation-container{
+	width :75%;
+	margin: auto;
+}
+
+.navigation-container>img{
+	height: 150px;
+	width: 100%;
+	object-fit: cover;
+	top:0px;
+}
+
+.main-navigation{
+	width: 100%;
+	background-color:rgb(85%,85%,85%);
+}
+
+.main-navigation>a{
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-family: sans-serif;
+	border: 1px solid white;
+	padding: 5px;
+	background-color: white;
+	display: inline-block;
+	
+}
+
+.main-navigation>a:hover{
+	background-color: green;
+	border: 1px solid green;
+	transform: translateY(-5px);
+	display: inline-block;
+	transition-duration: .5s;
+	color: white;
+}
+
+/* Page: Home */
+.image-bio>aside {
+	width: 40%;
+	right: 0px;
+    font-size: 20px;
+    position: absolute;
+    text-align: justify;
+    padding: 15px;
+	background-color: rgb(50%,80%,80%, 10%);
+}
+
+.image-bio>img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+abbr{
+	text-decoration: none;
+}
+
+.content{
+	width: 75%;
+	margin: auto;
+	display: block;
+	padding: 12px;
+}
+
+.image-bio{
+	height:400px;
+	overflow:hidden;
+	position:relative;
+	padding: 0px;
+}
+
+.quotes{
+	font-family: 'Almendra';
+}
+
+.weekly-schedule{
+	padding: 10px;
+	text-align: center;
+}
+
+.weekly-schedule>table{
+	width: 100%;
+}
+
+.weekly-schedule>table>tbody>tr>td{
+	background-color: red;
+	height: 120px;
+	background-color: rgb(85%,85%,85%);
+}
+
+.day-container{
+	border-radius: 5px;;
+	box-shadow: 2px 2px 2px gray;
+	overflow: hidden;
+}
+
+.weekday{
+	color: white;
+	font-weight: bold;
+	font-size: 22px;
+	width: 100%;
+	position: relative;
+	top:0px;
+	background-color:green;
+}
+
+.weekend{
+	color: white;
+	font-weight: bold;
+	font-size: 22px;
+	width: 100%;
+	background-color:darkred;
+}
+
+.work>img{
+	height: 20px;
+	width: 20px;
+	position: relative;
+	top: 3px;
+}
+
+/* Page: gallery */
+#photo-gallery-table{
+	width: 100%;
+	margin-top: 10px;
+}
+
+#photo-gallery-table>tbody>tr>td>a>img{
+	margin: 1%;
+	overflow:hidden;
+	width: 100%;
+	object-fit:cover; /*Main code for image cropping */
+}
+
+table>caption{
+	font-size: 28px;
+	padding: 5px;
+	font-family: 'Sofia';
+}
+
+address{
+	display: inline;
+}
+
+/*Page: Contact me */
+#contact-me{
+	width: 60%;
+	margin: auto;
+	margin-top: 60px;
+	margin-bottom: 60px;;
+}
+
+#contact-me>input{
+	width: 100%;
+	margin-bottom: 10px;
+	border: 1px solid green;
+	height: 25px;
+}
+
+textarea{
+	border: 1px solid green;
+	width: 100%;
+}
+
+button{
+	padding: 10px;
+	background-color: lightgreen;
+	border: 1px solid lightgreen;
+	font-weight: bold;
+}
+
+#error{
+	background-color: darkred;
+	padding: 10px;
+	margin-top: 5px;
+	border-radius: 5px;;
+}

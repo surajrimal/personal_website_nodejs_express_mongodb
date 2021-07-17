@@ -1,0 +1,83 @@
+body{
+    margin: 0px;
+}
+#landing-page{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(159, 183, 207);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+}
+
+.start-game{
+    height: 200px;
+    width: 200px;
+    transform: scale(1);
+    transition-duration: .3s;
+    cursor: pointer;
+}
+
+.start-game:hover{
+    transform: scale(1.2);
+    transition-duration: .3s;
+}
+
+#canvas-container{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+#canvas{
+    height: 90%;
+    width: 95%;
+    margin-left:2.5%;
+    margin-top: 2%;
+    background-color: rgb(139, 184, 184);
+    box-shadow: 2px 2px 12px blueviolet;;
+}
+
+#game-end{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -2;
+    background-color: teal;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons{
+    float: right;
+    margin: 1%;
+}
+.info{
+    float: left;
+    margin: 1%;
+}
+
+button{
+    transform: scale(1);
+    transition-duration: .3s;
+    border-radius: 0px;
+    border: 1px solid cadetblue;
+    background-color: cadetblue;
+    padding: 10px;
+
+}
+
+button:hover{
+    transform: scale(1.2);
+    transition-duration: .3s;
+    background-color: green;
+    border: 1px solid green;
+    cursor: pointer;
+}
