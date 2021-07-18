@@ -2,17 +2,18 @@
     <div class="content">
         <section>
             <form action="feedback" method="POST" id="contact-me" onkeyup="clearError()" onchange="clearError()">
+                {{error}}
                 <h3>Please leave your comment.</h3>
                 <label for="fname">Full Name:</label><br>
-                <input type="text" id="fname" name="fname" required><br>
+                <input type="text" id="fname" name="fname" value="Suraj Raimal" required><br>
                 <label for="address">Address:</label><br>
-                <input type="text" id="address" name="address" ><br>
+                <input type="text" id="address" name="address" value="Carbondale" ><br>
                 <label for="phone">Phone number:</label><br>
-                <input type="number" id="phone" name="phone" minlength="10" ><br>
+                <input type="number" id="phone" name="phone" minlength="10" value="6135658956" ><br>
                 <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required><br>
+                <input type="email" id="email" name="email" value="dssdas@sdfd.sdfds" required><br>
                 <label for="review">Comments:</label><br>
-                <textarea id="review" name="comment" rows="10" required></textarea><br>
+                <textarea id="review" name="comment" rows="10" required>Comment</textarea><br>
 
                 <button type="submit">Submit</button>
                 {{#if success}}

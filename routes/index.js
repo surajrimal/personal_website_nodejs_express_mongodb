@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const nodemailer = require("nodemailer");
 var fs = require('fs');
+const { errorMonitor } = require('stream');
  
 
 /* GET home page. */
@@ -19,7 +20,7 @@ router.get('/game', function(req, res, next) {
 });
 
 router.get('/feedback', function(req, res, next) {
-  res.render('feedback', { title: 'Feedback | Suraj Rimal' });
+  res.render('feedback', { title: 'Feedback | Suraj Rimal', error: req.query.error });
 });
 
 router.get('/feedback_received', function(req, res, next) {
@@ -64,12 +65,37 @@ router.post('/feedback', function(req, res, next) {
   }
 
   else{
-    var data = JSON.stringify(res.body, null, 2);
-    console.log(data);
-    fs.writeFile('feedback.json', data, function(err){
-      console.log('ass set.');
-    });
-    }
+        var data = JSON.stringify(req.body, null, 2);
+        fs.writeFile('feedback.json', data, 'ascii', function(err){
+          if(err){
+            console.log("Error:" + err)
+          }
+          else{
+            let mailTransporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'rimalsuraj50@gmail.com',
+                    pass: '9841312224'
+                }
+            });
+            
+            let mailDetails = {
+                from: 'rimalsuraj50@gmail.com',
+                to: 'surajrimal50@gmail.com',
+                subject: 'Test mail',
+                text: `Dear ${fullname}, Thank you for your feedback! From surajrimal@herokuapp.com`
+            };
+              
+            mailTransporter.sendMail(mailDetails, function(err, data) {
+                if(err) {
+                    return res.redirect("/feedback?error=Error posting feedback, please check again later!" )
+                } else {
+                    return res.redirect('/feedback_received');
+                }
+            });
+        }
+  });
+  }
 });
 
 module.exports = router;
