@@ -90,8 +90,9 @@ router.post('/feedback', function(req, res, next) {
                 if(err) {
                   console.log(err);
                     return res.redirect("/feedback?error=Error posting feedback, please check again later!" );
-                } else {
-                    return res.redirect('/feedback_received');
+                } else{
+                  console.log(data)
+                  return res.redirect('/feedback_received');
                 }
             });
         }
