@@ -81,8 +81,8 @@ router.post('/feedback', function(req, res, next) {
             
             let mailDetails = {
                 from: 'rimalsuraj50@gmail.com',
-                to: 'surajrimal50@gmail.com',
-                subject: 'Test mail',
+                to: email,
+                subject: 'Feedback received!',
                 text: `Dear ${fullname}, Thank you for your feedback! From surajrimal@herokuapp.com`
             };
               
