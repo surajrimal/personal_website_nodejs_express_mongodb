@@ -37,8 +37,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-const listener = app.listen(3000,()=>{
- console.log("Project running on port " + listener.address().port)
+
+const PORT = process.env.PORT ||5000;
+
+const listener = app.listen(PORT,()=>{
+ console.log("Project running on port " + PORT)
 });
+
 
 module.exports = app
