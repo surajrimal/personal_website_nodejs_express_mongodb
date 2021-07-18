@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const nodemailer = require("nodemailer");
+var fs = require('fs');
+ 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -61,28 +64,12 @@ router.post('/feedback', function(req, res, next) {
   }
 
   else{
-    var db = req.db;
-    var collection = db.get("feedbacks")
-    var deletedCount;
-    collection.remove({"email": email}, function(err, obj) {
-      if (err) throw err;
-      deletedCount =  obj.deletedCount;
-      collection.insert(req.body, function(err, obj){
-        if(err) throw err
-        else{
-          collection.count(function(err, obj){
-            if(err) throw err;
-            else{
-              req.app.set('isRedirect', true);
-              req.app.set('count', obj);
-              req.app.set('deletedCount', deletedCount);
-              res.redirect('feedback_received');
-            }
-          })
-        }
-      });
+    var data = JSON.stringify(res.body, null, 2);
+    console.log(data);
+    fs.writeFile('feedback.json', data, function(err){
+      console.log('ass set.');
     });
-  }
+    }
 });
 
 module.exports = router;
