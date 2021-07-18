@@ -28,6 +28,7 @@ router.get('/feedback_received', function(req, res, next) {
   if(!req.app.get('isRedirect')){
     return res.redirect('/feedback');
   }
+  res.render('feedback_received', { title: 'Thank you! | Suraj Rimal', message: "Thank you for your feedback!" });
 
 });
 
@@ -83,7 +84,7 @@ router.post('/feedback', function(req, res, next) {
                 from: 'rimalsuraj50@gmail.com',
                 to: email,
                 subject: 'Feedback received!',
-                text: `Dear ${fullname}, Thank you for your feedback! From surajrimal@herokuapp.com`
+                text: `Dear ${fullname}, Thank you for your feedback! From suraj-project4@herokuapp.com`
             };
               
             mailTransporter.sendMail(mailDetails, function(err, data) {
@@ -91,7 +92,7 @@ router.post('/feedback', function(req, res, next) {
                   console.log(err);
                     return res.redirect("/feedback?error=Error posting feedback, please check again later!" );
                 } else{
-                  console.log(data)
+                  req.app.set('isRedirect', true);
                   return res.redirect('/feedback_received');
                 }
             });
