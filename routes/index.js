@@ -76,7 +76,7 @@ router.post('/feedback', function(req, res, next) {
                 service: 'gmail',
                 auth: {
                     user: 'rimalsuraj50@gmail.com',
-                    pass: '9841312224'
+                    pass: 'Nepalnumber@9841312224'
                 }
             });
             
