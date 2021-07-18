@@ -88,7 +88,8 @@ router.post('/feedback', function(req, res, next) {
               
             mailTransporter.sendMail(mailDetails, function(err, data) {
                 if(err) {
-                    return res.redirect("/feedback?error=Error posting feedback, please check again later!" )
+                  console.log(err);
+                    return res.redirect("/feedback?error=Error posting feedback, please check again later!" );
                 } else {
                     return res.redirect('/feedback_received');
                 }
