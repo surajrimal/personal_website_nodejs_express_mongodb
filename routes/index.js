@@ -28,9 +28,14 @@ router.get('/feedback_received', function(req, res, next) {
   if(!req.app.get('isRedirect')){
     return res.redirect('/feedback');
   }
-  count = req.app.get('count')
-  deletedCount = req.app.get('deletedCount')
-  res.render('feedback_received', { title: 'Thank you! | Suraj Rimal', message: "Thank you for your feedback!" });
+  count = req.app.get('count');
+  deletedCount = req.app.get('deletedCount');
+  if(deletedCount != 0){
+    res.render('feedback_received', { title: 'Thank you! | Suraj Rimal', message: "Thank you for revisiting. Your new feedback has been recorded!" });
+
+  }else{
+    res.render('feedback_received', {title: 'Thank you! | Suraj Rimal', message: "Thank you for your feedback. You are my "+ count +"th honored guest who left a feedback!" });
+  }
 
 });
 
@@ -77,10 +82,16 @@ router.post('/feedback', function(req, res, next) {
       collection.insert(req.body, function(err,obj){
         if(err) throw err;
         else{
-          req.app.set('isRedirect', true);
-          req.app.set('count', obj);
-          req.app.set('deletedCount', deletedCount);
-          res.redirect('feedback_received');
+          collection.count(function(err, obj){
+            if(err) throw err;
+            else{
+              req.app.set('isRedirect', true);
+              req.app.set('count', obj);
+              req.app.set('deletedCount', deletedCount);
+              res.redirect('feedback_received');
+            }
+          })
+         
         }
       })
     })

@@ -6,6 +6,11 @@ var logger = require('morgan');
 
 var monk = require('monk');
 var db = monk('mongodb+srv://suraj:suraj@cluster0.b7pwh.mongodb.net/mydb?retryWrites=true&w=majority');
+db.then(() =>{
+  console.log("connection success");
+}).catch((e)=>{
+  console.error("Error !",e);
+});
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -21,6 +26,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// Make our db accessible to our router
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+ });
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
