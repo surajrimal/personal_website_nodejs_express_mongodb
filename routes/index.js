@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const nodemailer = require("nodemailer");
-var fs = require('fs');
-const { errorMonitor } = require('stream');
+//const nodemailer = require("nodemailer");
+//var fs = require('fs');
+//const { errorMonitor } = require('stream');
  
 
 /* GET home page. */
@@ -28,7 +28,14 @@ router.get('/feedback_received', function(req, res, next) {
   if(!req.app.get('isRedirect')){
     return res.redirect('/feedback');
   }
-  res.render('feedback_received', { title: 'Thank you! | Suraj Rimal', message: "Thank you for your feedback!" });
+  count = req.app.get('count');
+  deletedCount = req.app.get('deletedCount');
+  if(deletedCount != 0){
+    res.render('feedback_received', { title: 'Thank you! | Suraj Rimal', message: "Thank you for revisiting. Your new feedback has been recorded!" });
+
+  }else{
+    res.render('feedback_received', {title: 'Thank you! | Suraj Rimal', message: "Thank you for your feedback. You are my "+ count +"th honored guest who left a feedback!" });
+  }
 
 });
 
@@ -66,38 +73,28 @@ router.post('/feedback', function(req, res, next) {
   }
 
   else{
-        var data = JSON.stringify(req.body, null, 2);
-        fs.writeFile('feedback.json', data, 'ascii', function(err){
-          if(err){
-            console.log("Error:" + err)
-          }
-          else{
-            let mailTransporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'rimalsuraj50@gmail.com',
-                    pass: 'Nepalnumber@9841312224'
-                }
-            });
-            
-            let mailDetails = {
-                from: 'rimalsuraj50@gmail.com',
-                to: email,
-                subject: 'Feedback received!',
-                text: `Dear ${fullname}, Thank you for your feedback! From suraj-project4@herokuapp.com`
-            };
-              
-            mailTransporter.sendMail(mailDetails, function(err, data) {
-                if(err) {
-                  console.log(err);
-                    return res.redirect("/feedback?error=Error posting feedback, please check again later!" );
-                } else{
-                  req.app.set('isRedirect', true);
-                  return res.redirect('/feedback_received');
-                }
-            });
+    var db = req.db;
+    var collection = db.get("feedbacks");
+    var deletedCount;
+    collection.remove({"email": email}, function(err, obj){
+      if(err) throw err;
+      deletedCount = obj.deletedCount;
+      collection.insert(req.body, function(err,obj){
+        if(err) throw err;
+        else{
+          collection.count(function(err, obj){
+            if(err) throw err;
+            else{
+              req.app.set('isRedirect', true);
+              req.app.set('count', obj);
+              req.app.set('deletedCount', deletedCount);
+              res.redirect('feedback_received');
+            }
+          })
+         
         }
-  });
+      })
+    })
   }
 });
 
